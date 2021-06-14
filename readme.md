@@ -5,13 +5,13 @@ Middleware for limiting requests by route. It's designed for ExpressJS and uses 
 
 ### Installation
 ```
-npm install --save @justpsst/iprequestlimitter
+npm install --save @justpsst/iprequestlimiter
 ```
 ### Usage
 ```javascript
-import { ipLimitter } from '@justpsst/iprequestlimitter';
+import { ipLimiter } from '@justpsst/iprequestlimiter';
 
-router.get('/', ipLimitter(config), (request, response) => {...});
+router.get('/', ipLimiter(config), (request, response) => {...});
 ```
 
 ### Config interface
@@ -19,7 +19,7 @@ router.get('/', ipLimitter(config), (request, response) => {...});
 Property | Type | Default | Description
 ------------ | ------------- | ------------- | -------------
 delays | number[], optional | [10, 20, 30, 40, 50, 60] | Delay between requests in seconds. In case when request comes before delay timer expires, delay timer would be increased (10 > 20 > 30 ...)
-storeKey | string, optional | "ipLimitter" | Key for redis to identify request. In redis it would be stored like `${storeKey}_${path}_${clientIp}` 
+storeKey | string, optional | "ipLimiter" | Key for redis to identify request. In redis it would be stored like `${storeKey}_${path}_${clientIp}` 
 increaseByLimitReached | number, optional | 0 | Number of seconds, which would be added to delay timer in case when 'delays' array reaches it's limit
 redisOptions | redis.ClientOpts, optional | {} | Redis options described here: https://www.npmjs.com/package/redis
 freeAttempts | number, optional | 0 | Number of free attempts, when delay timer won't be used

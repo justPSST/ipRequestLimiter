@@ -4,7 +4,7 @@ import moment from 'moment';
 import requestIp from 'request-ip';
 import { getRedisMethods } from './redis';
 
-interface ILimitterSettings {
+interface ILimiterSettings {
   delays?: number[],
   storeKey?: string,
   increaseByLimitReached?: number,
@@ -25,14 +25,14 @@ interface IDelayCofig {
   attemptsLeft?: number
 }
 
-export const ipLimitter = ({
+export const ipLimiter = ({
   delays = [10, 20, 30, 40, 50, 60],
-  storeKey = 'ipLimitter',
+  storeKey = 'ipLimiter',
   increaseByLimitReached = 0,
   redisOptions = {},
   freeAttempts = 3,
   freeAttemptsUnlockDelay = 10
-}: ILimitterSettings = {}) => async (request: express.Request, responce: express.Response, next: express.NextFunction) => {
+}: ILimiterSettings = {}) => async (request: express.Request, responce: express.Response, next: express.NextFunction) => {
   if (delays.length === 0) return next();
 
   const { getRedisValue, setRedisValue } = getRedisMethods(redisOptions);
